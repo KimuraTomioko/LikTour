@@ -1,0 +1,403 @@
+/* Базовые стили */
+
+.block-inf {
+  margin-top: 10px;
+  padding: 0 15px;
+}
+
+/* Общие стили для контейнеров */
+.container3,
+.container1 {
+  max-width: 1320px;
+  width: 100%;
+  margin: 35px auto 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 0;
+}
+
+/* Общие стили для текстовых блоков */
+.text-content3,
+.text-content1 {
+  width: 100%;
+  padding: 0 15px;
+  order: 2;
+}
+
+/* Общие стили для блоков с изображением */
+.image-content3,
+.image-content1 {
+  width: 100%;
+  padding: 0 15px;
+  order: 1;
+  margin-bottom: 20px;
+}
+
+/* Общие стили для заголовков */
+.text-content3 h2,
+.text-content1 h2 {
+  font-size: 28px;
+  margin: 20px 0;
+  color: #1e1e1e;
+  font-weight: 600;
+}
+
+/* Общие стили для параграфов */
+.text-content3 p,
+.text-content1 p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* Общие стили для изображений */
+.image-content3 img,
+.image-content1 img {
+  width: 100%;
+  height: auto;
+  max-height: 390px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Медиа-запросы для планшетов (768px и выше) */
+@media (min-width: 768px) {
+  .text-content3,
+  .text-content1 {
+    width: 50%;
+    padding: 0 15px;
+  }
+
+  .image-content3,
+  .image-content1 {
+    width: 50%;
+    padding: 0 15px;
+    margin-bottom: 0;
+  }
+
+  .text-content3 h2,
+  .text-content1 h2 {
+    font-size: 30px;
+  }
+
+  .text-content3 p,
+  .text-content1 p {
+    font-size: 17px;
+  }
+
+  .image-content3 img,
+  .image-content1 img {
+    height: 350px;
+  }
+}
+
+/* Медиа-запросы для десктопов (992px и выше) */
+@media (min-width: 992px) {
+  .container3 {
+    flex-wrap: nowrap;
+  }
+
+  .container1 {
+    flex-wrap: nowrap;
+  }
+
+  .text-content3 {
+    order: 1;
+    width: calc(50% - 20px);
+  }
+
+  .image-content3 {
+    order: 2;
+    width: calc(50% - 20px);
+    margin-left: 40px;
+  }
+
+  .image-content1 {
+    order: 1;
+    width: calc(50% - 20px);
+  }
+
+  .text-content1 {
+    order: 2;
+    width: calc(50% - 20px);
+    margin-left: 40px;
+  }
+
+  .text-content3 h2,
+  .text-content1 h2 {
+    font-size: 32px;
+    margin: 35px 0 40px 0;
+  }
+
+  .text-content3 p,
+  .text-content1 p {
+    font-size: 18px;
+    color: #aaa;
+  }
+
+  .image-content3 img,
+  .image-content1 img {
+    height: 390px;
+  }
+}
+
+/* Медиа-запросы для больших экранов (1200px и выше) */
+@media (min-width: 1200px) {
+  .text-content3 {
+    width: calc(50% - 105px);
+  }
+
+  .image-content3 {
+    width: calc(50% - 20px);
+  }
+
+  .image-content1 {
+    width: calc(50% - 20px);
+  }
+
+  .text-content1 {
+    width: calc(50% - 20px);
+  }
+}
+
+.page-heading1 {
+  position: relative;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 40px 0px;
+  text-align: center;
+}
+
+/* Затемнение на 50% с помощью псевдоэлемента */
+.page-heading1::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 50% затемнение */
+  z-index: 1;
+}
+
+/* Фоновое изображение */
+.page-heading1::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 0;
+}
+
+/* Контент должен быть поверх затемнения */
+.page-heading1 > * {
+  position: relative;
+  z-index: 2;
+}
+/* Полупрозрачный чёрный фон для всего контента */
+.content-overlay {
+  border-radius: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.breadcrumb {
+  background-color: #fff;
+  color: #1e1e1e;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 10px 25px;
+  display: inline-block;
+  margin-bottom: 30px;
+}
+
+.breadcrumb a {
+  color: #1e1e1e;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.text-page {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+.description {
+  font-size: 1rem;
+  color: #fff;
+  opacity: 0.9;
+  margin: 0 auto 30px;
+  max-width: 800px;
+  line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  padding: 0 20px;
+  text-align: center;
+}
+
+/* Стили формы */
+.booking-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: flex-end;
+  margin: 40px auto 0;
+  justify-content: center;
+  max-width: 800px;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.form-control {
+  background-color: rgba(255, 255, 255, 0.849);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(0, 255, 42, 0.411)5, 255, 255, 0.849);
+  height: 50px;
+  border-radius: 5px;
+  padding: 12px 15px;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background-color: #f35525;
+  border: none;
+  padding: 12px 30px;
+  font-weight: 600;
+  border-radius: 5px;
+  height: 50px;
+  min-width: 180px;
+  transition: all 0.3s;
+}
+
+/* Модальное окно */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: rgba(30, 30, 30, 0.95);
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.3s ease-out;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.modal-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #f35525;
+}
+
+.modal-text {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.modal-close {
+  background-color: #f35525;
+  border: none;
+  padding: 12px 30px;
+  font-weight: 600;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.modal-close:hover {
+  background-color: #e04b1b;
+}
+
+/* Адаптивные стили */
+@media (max-width: 992px) {
+  .content-overlay {
+    padding: 30px;
+  }
+  .text-page {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-overlay {
+    padding: 20px;
+  }
+  .booking-form {
+    flex-direction: column;
+  }
+  .form-group,
+  .btn-primary {
+    width: 100%;
+  }
+  .modal-content {
+    padding: 30px 20px;
+  }
+  .modal-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .text-page {
+    font-size: 1.8rem;
+  }
+  .description {
+    font-size: 0.9rem;
+  }
+  .modal-title {
+    font-size: 1.5rem;
+  }
+  .modal-text {
+    font-size: 1rem;
+  }
+}

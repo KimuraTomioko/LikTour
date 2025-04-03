@@ -1,0 +1,331 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>ЛИК-ТУР</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'LikTour/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'LikTour/css/fontawesome.css' %}" />
+    <link rel="stylesheet" href="{% static 'LikTour/css/templatemo-villa-agency.css' %}" />
+    <link rel="stylesheet" href="{% static 'LikTour/css/owl.css' %}" />
+    <link rel="stylesheet" href="{% static 'LikTour/css/animate.css' %}" />
+    <link rel="stylesheet" href="{% static 'LikTour/css/page_sities.css' %}" />
+    <link rel="stylesheet" href="{% static 'LikTour/css/baner.css' %}" />
+    <link rel="stylesheet" href="{% static 'LikTour/css/fyter.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="sub-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-8">
+            <ul class="info">
+              <a href="mailto:lik-tour@yandex.ru">
+                <li><i class="fa fa-envelope"></i>lik-tour@yandex.ru</li>
+              </a>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <ul class="social-links">
+              <li>
+                <a
+                  href="https://t.me/NataliyaBelimova?text=Здравствуйте,%20я%20по%20поводу..."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fab fa-telegram"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://wa.me/79141423955?text=Здравствуйте,%20я%20по%20поводу..."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fab fa-whatsapp"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a href="index.html" class="logo">
+                <img
+                  src="assets/images/logotip.svg"
+                  alt="logo"
+                  class="logotip-img"
+                />
+              </a>
+              <!-- ***** Logo End ***** -->
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li><a href="index.html">ГЛАВНАЯ</a></li>
+                <li><a href="properties.html">ВСЕ ТУРЫ</a></li>
+                <li><a href="all-news.html">НОВОСТИ</a></li>
+                <li><a href="property-details.html">О НАС</a></li>
+                <li><a href="contact.html">КОНТАКТЫ</a></li>
+                <li>
+                  <a href="tel:+79141423955"
+                    ><i class="fa fa-phone"></i> Получить онлайн консультацию</a
+                  >
+                </li>
+              </ul>
+              <a class="menu-trigger">
+                <span>Меню</span>
+              </a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <div class="page-heading1 header-text1">
+      <div class="container">
+        <div class="content-overlay">
+          <span class="breadcrumb">
+            <a href="index.html">Главная</a> / {{ city.name }}
+          </span>
+          <div class="text-page">{{ country }} - {{ city.name }}</div>
+          <p class="description">
+            {{ city.description }}
+          </p>
+          <form id="bookingForm" class="booking-form" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <input
+                type="text"
+                name="name"
+                class="form-control"
+                placeholder="Ваше имя"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="tel"
+                name="telephone_number"
+                class="form-control"
+                placeholder="Ваш телефон"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Оставить заявку
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Модальное окно подтверждения -->
+    {% if messages %}
+      <div class="modal-overlay active" id="successModal">
+        <div class="modal-content">
+          {% for message in messages %}
+            <h2 class="modal-title">{{ message }}</h2>
+          {% endfor %}
+          <p class="modal-text">Мы перезвоним вам, будете на связи.</p>
+          <button class="modal-close" id="closeModal">Хорошо</button>
+        </div>
+      </div>
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("bookingForm");
+        const modal = document.getElementById("successModal");
+        const closeBtn = document.getElementById("closeModal");
+
+        // Обработка отправки формы
+        form.addEventListener("submit", function (e) {
+          // Оставляем стандартное поведение для отправки на сервер
+        });
+
+        // Закрытие модального окна
+        if (closeBtn) {
+          closeBtn.addEventListener("click", function () {
+            modal.classList.remove("active");
+          });
+        }
+
+        // Закрытие по клику вне окна
+        if (modal) {
+          modal.addEventListener("click", function (e) {
+            if (e.target === modal) {
+              modal.classList.remove("active");
+            }
+          });
+        }
+      });
+    </script>
+
+    <div class="block-inf">
+      <div class="container3">
+        <div class="text-content3">
+          <h2>КУХНЯ</h2>
+          <p>
+            {{ city.cuisine }}
+          </p>
+        </div>
+        <div class="image-content3">
+          {% if city.photo_cuisine %}
+            <img src="{{ city.photo_cuisine.url }}" alt="Кухня {{ city.name }}" />
+          {% else %}
+            <img src="assets/images/strani/photo_page-sities/kihnia.jpg" alt="Описание изображения" />
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="block-inf">
+      <div class="container1">
+        <div class="image-content1">
+          {% if city.photo_what_to_see %}
+            <img src="{{ city.photo_what_to_see.url }}" alt="Достопримечательности {{ city.name }}" />
+          {% else %}
+            <img src="assets/images/strani/photo_page-sities/prosmotr.jpg" alt="Описание изображения" />
+          {% endif %}
+        </div>
+        <div class="text-content1">
+          <h2>ЧТО ПОСМОТРЕТЬ</h2>
+          <p>
+            {{ city.what_to_see }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block-inf">
+      <div class="container3">
+        <div class="text-content3">
+          <h2>КОГДА СЕЗОН?</h2>
+          <p>
+            {{ city.when_is_the_season }}
+          </p>
+        </div>
+        <div class="image-content3">
+          {% if city.photo_when_is_the_season %}
+            <img src="{{ city.photo_when_is_the_season.url }}" alt="Сезон {{ city.name }}" />
+          {% else %}
+            <img src="assets/images/strani/photo_page-sities/sezon.jpg" alt="Описание изображения" />
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- футер -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <!-- Первая колонка - Логотип и соцсети -->
+          <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+            <a href="index.html" class="logo">
+              <img
+                src="assets/images/logotip.svg"
+                alt="logo"
+                class="logotip-img"
+              />
+            </a>
+            <div class="footer-social d-flex">
+              <a
+                href="https://t.me/NataliyaBelimova?text=Здравствуйте,%20я%20по%20поводу..."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fab fa-telegram"></i>
+              </a>
+              <a
+                href="https://wa.me/79141423955?text=Здравствуйте,%20я%20по%20поводу..."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+            <p class="footer-copyright">
+              © 2025 официальный сайт турфирмы ЛИК-ТУР
+            </p>
+          </div>
+
+          <!-- Вторая колонка - Направления -->
+          <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+            <div class="text-fyter">Направления</div>
+            <br />
+            <ul class="footer-links">
+              <li><a href="properties.html">Все туры</a></li>
+              <li>
+                <a href="tel:+79141423955"> Получить онлайн консультацию</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Третья колонка - Направления -->
+          <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+            <div class="text-fyter">Информация</div>
+            <br />
+            <ul class="footer-links">
+              <li><a href="property-details.html">О нас</a></li>
+              <li><a href="contact.html">Контакты</a></li>
+              <li><a href="all-news.html">Новости</a></li>
+            </ul>
+          </div>
+
+          <!-- Четвертая колонка - Информация -->
+          <div class="col-lg-3 col-md-6">
+            <div class="text-fyter">Персональные данные</div>
+            <br />
+            <ul class="footer-links">
+              <li>
+                <a href="policy.html">Политика обработки персональных данных</a>
+              </li>
+              <li>
+                <a href="agreement.html"
+                  >Согласие на обработку персональных данных</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- енд-футер -->
+
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/counter.js"></script>
+    <script src="assets/js/custom.js"></script>
+  </body>
+</html>
