@@ -9,9 +9,14 @@ class AdminCities(admin.ModelAdmin):
 
 @admin.register(CountryTour)
 class AdminCountryTour(admin.ModelAdmin):
-    list_display = ('country', 'city')
+    list_display = ('country', 'get_cities')
     list_display_links = ('country',)
     list_filter = ('country',)
+    filter_horizontal = ('cities',)
+
+    def get_cities(self, obj):
+        return ', '.join(city.name for city in obj.cities.all())
+    get_cities.short_description = 'Города'
 
 @admin.register(ContactForm)
 class AdminContactForm(admin.ModelAdmin):

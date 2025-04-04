@@ -3,7 +3,7 @@ from .models import CountryTour, Cities, SmallContactForm
 from django.contrib import messages
 
 def index(request):
-    countries = CountryTour.objects.select_related('city').all()
+    countries = CountryTour.objects.prefetch_related('cities').all()
     country_city_map = {}
     for country_tour in countries:
         country_name = country_tour.country
@@ -12,7 +12,7 @@ def index(request):
                 'photo': country_tour.country_photo.url if country_tour.country_photo else None,
                 'cities': []
             }
-        country_city_map[country_name]['cities'].append(country_tour.city)
+        country_city_map[country_name]['cities'].extend(country_tour.cities.all())
 
     context = {
         'country_city_map': country_city_map,
@@ -21,7 +21,7 @@ def index(request):
 
 def city_detail(request, city_id):
     city = get_object_or_404(Cities, id=city_id)
-    country = CountryTour.objects.filter(city=city).first()  # Получаем страну для города
+    country = CountryTour.objects.filter(cities=city).first()  # Получаем страну для города
     context = {
         'city': city,
         'country': country.country if country else 'Не указана страна',
@@ -29,8 +29,7 @@ def city_detail(request, city_id):
     return render(request, 'LikTour/city_detail.html', context)
 
 def all_tours(request):
-    countries = CountryTour.objects.select_related('city').all()
-
+    countries = CountryTour.objects.prefetch_related('cities').all()
     country_city_map = {}
 
     for country_tour in countries:
@@ -40,7 +39,7 @@ def all_tours(request):
                 'photo': country_tour.country_photo.url if country_tour.country_photo else None,
                 'cities': []
             }
-        country_city_map[country_name]['cities'].append(country_tour.city)
+        country_city_map[country_name]['cities'].extend(country_tour.cities.all())
     
     context = {
         'country_city_map': country_city_map

@@ -23,10 +23,10 @@ class Cities(models.Model):
 class CountryTour(models.Model):
     country = models.CharField(max_length=30, verbose_name='Название страны')
     country_photo = models.ImageField(upload_to='image/%Y/%m/%d', blank=True, null=True, verbose_name='Картинка страны')
-    city = models.ForeignKey(Cities, on_delete=models.PROTECT, verbose_name='Название города')
+    cities = models.ManyToManyField(Cities, verbose_name='Названия городов')
 
     def __str__(self):
-        return f"{self.country} -- {self.city}"
+        return f"{self.country} -- {', '.join(city.name for city in self.cities.all())}"
     
     class Meta:
         verbose_name = 'Страна и её города'
