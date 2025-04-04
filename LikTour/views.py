@@ -27,3 +27,38 @@ def city_detail(request, city_id):
         'country': country.country if country else 'Не указана страна',
     }
     return render(request, 'LikTour/city_detail.html', context)
+
+def all_tours(request):
+    countries = CountryTour.objects.select_related('city').all()
+
+    country_city_map = {}
+
+    for country_tour in countries:
+        country_name = country_tour.country
+        if country_name not in country_city_map:
+            country_city_map[country_name] = {
+                'photo': country_tour.country_photo.url if country_tour.country_photo else None,
+                'cities': []
+            }
+        country_city_map[country_name]['cities'].append(country_tour.city)
+    
+    context = {
+        'country_city_map': country_city_map
+    }
+
+    return render(request, 'LikTour/properties.html', context)
+
+def all_news(request):
+    return render(request, 'LikTour/all-news.html')
+
+def about_us(request):
+    return render(request, 'LikTour/property-details.html')
+
+def contact_with_us(request):
+    return render(request, 'LikTour/contact.html')
+
+def our_policy(request):
+    return render(request, 'LikTour/policy.html')
+
+def agreement(request):
+    return render(request, 'LikTour/agreement.html')

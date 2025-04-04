@@ -75,9 +75,9 @@
           <div class="col-12">
             <nav class="main-nav">
               <!-- ***** Logo Start ***** -->
-              <a href="index.html" class="logo">
+              <a href="{% url 'main_page' %}" class="logo">
                 <img
-                  src="assets/images/logotip.svg"
+                  src="{% static 'LikTour/images/logotip.svg' %}"
                   alt="logo"
                   class="logotip-img"
                 />
@@ -85,11 +85,11 @@
               <!-- ***** Logo End ***** -->
               <!-- ***** Menu Start ***** -->
               <ul class="nav">
-                <li><a href="index.html">ГЛАВНАЯ</a></li>
-                <li><a href="properties.html">ВСЕ ТУРЫ</a></li>
-                <li><a href="all-news.html">НОВОСТИ</a></li>
-                <li><a href="property-details.html">О НАС</a></li>
-                <li><a href="contact.html">КОНТАКТЫ</a></li>
+                <li><a href="{% url 'main_page' %}">ГЛАВНАЯ</a></li>
+                <li><a href="{% url 'properties' %}">ВСЕ ТУРЫ</a></li>
+                <li><a href="{% url 'all_news' %}">НОВОСТИ</a></li>
+                <li><a href="{% url 'about_us' %}">О НАС</a></li>
+                <li><a href="{% url 'contact_with_us' %}">КОНТАКТЫ</a></li>
                 <li>
                   <a href="tel:+79141423955"
                     ><i class="fa fa-phone"></i> Получить онлайн консультацию</a
@@ -200,7 +200,7 @@
           {% if city.photo_cuisine %}
             <img src="{{ city.photo_cuisine.url }}" alt="Кухня {{ city.name }}" />
           {% else %}
-            <img src="assets/images/strani/photo_page-sities/kihnia.jpg" alt="Описание изображения" />
+            <img src="{% static 'LikTour/images/strani/photo_page-sities/kihnia.jpg' %}" alt="Описание изображения" />
           {% endif %}
         </div>
       </div>
@@ -212,7 +212,7 @@
           {% if city.photo_what_to_see %}
             <img src="{{ city.photo_what_to_see.url }}" alt="Достопримечательности {{ city.name }}" />
           {% else %}
-            <img src="assets/images/strani/photo_page-sities/prosmotr.jpg" alt="Описание изображения" />
+            <img src="{% static 'LikTour/images/strani/photo_page-sities/prosmotr.jpg' %}" alt="Описание изображения" />
           {% endif %}
         </div>
         <div class="text-content1">
@@ -236,7 +236,7 @@
           {% if city.photo_when_is_the_season %}
             <img src="{{ city.photo_when_is_the_season.url }}" alt="Сезон {{ city.name }}" />
           {% else %}
-            <img src="assets/images/strani/photo_page-sities/sezon.jpg" alt="Описание изображения" />
+            <img src="{% static 'LikTour/images/strani/photo_page-sities/sezon.jpg' %}" alt="Описание изображения" />
           {% endif %}
         </div>
       </div>
@@ -248,9 +248,9 @@
         <div class="row">
           <!-- Первая колонка - Логотип и соцсети -->
           <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-            <a href="index.html" class="logo">
+            <a href="{% url 'main_page' %}" class="logo">
               <img
-                src="assets/images/logotip.svg"
+                src="{% static 'LikTour/images/logotip.svg' %}"
                 alt="logo"
                 class="logotip-img"
               />
@@ -281,7 +281,7 @@
             <div class="text-fyter">Направления</div>
             <br />
             <ul class="footer-links">
-              <li><a href="properties.html">Все туры</a></li>
+              <li><a href="{% url 'properties' %}">Все туры</a></li>
               <li>
                 <a href="tel:+79141423955"> Получить онлайн консультацию</a>
               </li>
@@ -293,9 +293,9 @@
             <div class="text-fyter">Информация</div>
             <br />
             <ul class="footer-links">
-              <li><a href="property-details.html">О нас</a></li>
-              <li><a href="contact.html">Контакты</a></li>
-              <li><a href="all-news.html">Новости</a></li>
+              <li><a href="{% url 'about_us' %}">О нас</a></li>
+              <li><a href="{% url 'contact_with_us' %}">Контакты</a></li>
+              <li><a href="{% url 'all_news' %}">Новости</a></li>
             </ul>
           </div>
 
@@ -305,10 +305,10 @@
             <br />
             <ul class="footer-links">
               <li>
-                <a href="policy.html">Политика обработки персональных данных</a>
+                <a href="{% url 'our_policy' %}">Политика обработки персональных данных</a>
               </li>
               <li>
-                <a href="agreement.html"
+                <a href="{% url 'agreement' %}"
                   >Согласие на обработку персональных данных</a
                 >
               </li>
@@ -321,11 +321,11 @@
 
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/isotope.min.js"></script>
-    <script src="assets/js/owl-carousel.js"></script>
-    <script src="assets/js/counter.js"></script>
-    <script src="assets/js/custom.js"></script>
+    <script src="{% static 'LikTour/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'LikTour/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'LikTour/js/isotope.min.js' %}"></script>
+    <script src="{% static 'LikTour/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'LikTour/js/counter.js' %}"></script>
+    <script src="{% static 'LikTour/js/custom.js' %}"></script>
   </body>
 </html>
