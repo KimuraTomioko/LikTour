@@ -1,0 +1,652 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>ЛИК-ТУР</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'LikTour/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'LikTour/css/fontawesome.css' %}" />
+    <link rel="stylesheet" href="{% static 'LikTour/css/templatemo-villa-agency.css' %}" />
+    <link rel="stylesheet" href="{% static 'LikTour/css/owl.css' %}" />
+    <link rel="stylesheet" href="{% static 'LikTour/css/animate.css' %}" />
+    <link rel="stylesheet" href="{% static 'LikTour/css/baner.css' %}" />
+    <link rel="stylesheet" href="{% static 'LikTour/css/fyter.css' %}" />
+    <link rel="stylesheet" href="{% static 'LikTour/css/news.css' %}" />
+    <link rel="stylesheet" href="{% static 'LikTour/css/page_sities.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="sub-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-8">
+            <ul class="info">
+              <a href="mailto:lik-tour@yandex.ru">
+                <li><i class="fa fa-envelope"></i>lik-tour@yandex.ru</li>
+              </a>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <ul class="social-links">
+              <li>
+                <a
+                  href="https://t.me/NataliyaBelimova?text=Здравствуйте,%20я%20по%20поводу..."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fab fa-telegram"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://wa.me/79141423955?text=Здравствуйте,%20я%20по%20поводу..."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fab fa-whatsapp"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a href="{% url 'main_page' %}" class="logo">
+                <img
+                  src="{% static 'LikTour/images/logotip.svg' %}"
+                  alt="logo"
+                  class="logotip-img"
+                />
+              </a>
+              <!-- ***** Logo End ***** -->
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li><a href="{% url 'main_page' %}">ГЛАВНАЯ</a></li>
+                <li><a href="{% url 'properties' %}">ВСЕ ТУРЫ</a></li>
+                <li><a href="{% url 'all_news' %}">НОВОСТИ</a></li>
+                <li><a href="{% url 'about_us' %}">О НАС</a></li>
+                <li><a href="{% url 'contact_with_us' %}">КОНТАКТЫ</a></li>
+                <li>
+                  <a href="tel:+79141423955"
+                    ><i class="fa fa-phone"></i> Получить онлайн консультацию</a
+                  >
+                </li>
+              </ul>
+              <a class="menu-trigger">
+                <span>Меню</span>
+              </a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- Баннеры из index.html -->
+    <div class="main-banner">
+      <div class="owl-carousel owl-banner">
+        {% for banner in banners %}
+          <div class="item" style="background-image: url('{{ banner.image.url }}');">
+            <div class="header-text">
+              <span class="category">{{ banner.subtitle }}</span>
+              <h2>{{ banner.title }}</h2>
+              {% if banner.link %}
+                <a href="{{ banner.link }}" class="details-btn">ПОДРОБНЕЕ</a>
+              {% else %}
+                <a href="#" class="details-btn">ПОДРОБНЕЕ</a>
+              {% endif %}
+            </div>
+          </div>
+        {% empty %}
+          <div class="item" style="background-image: url('{% static 'LikTour/images/default_banner.jpg' %}');">
+            <div class="header-text">
+              <span class="category">Нет баннеров</span>
+              <h2>Добавьте баннеры в админке</h2>
+              <a href="#" class="details-btn">ПОДРОБНЕЕ</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Секция "Почему вы выбираете нас?" из index.html -->
+    <div class="featured section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5">
+            <div class="section-heading">
+              <h2>Почему вы выбираете нас?</h2>
+            </div>
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    Сколько существует «ЛИК-ТУР» ?
+                  </button>
+                </h2>
+                <div
+                  id="collapseOne"
+                  class="accordion-collapse collapse show"
+                  aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample"
+                >
+                  <div class="accordion-body">
+                    «ЛИК-ТУР» - <strong>20 лет</strong>
+                    на туристическом рынке! Тысячи довольных клиентов, лучшие
+                    направления и выгодные предложения. Ваш отдых в надежных
+                    руках –
+                    <a href="{% url 'properties' %}" target="_blank"
+                      >путешествуйте с нами!</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="collapseTwo"
+                  >
+                    Почему стоит выбрать «ЛИК ТУР»?
+                  </button>
+                </h2>
+                <div
+                  id="collapseTwo"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingTwo"
+                  data-bs-parent="#accordionExample"
+                >
+                  <div class="accordion-body">
+                    ✅ 20 лет опыта –
+                    <strong>мы знаем всё об идеальном отдыхе!</strong><br />
+                    ✅ Тысячи довольных клиентов –
+                    <code>гарантия качества и надежности.</code><br />
+                    ✅ Индивидуальный подход – подберем тур именно под ваши
+                    пожелания. <br />✅ Лучшие цены и акции – путешествуйте
+                    выгодно!
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree"
+                    aria-expanded="false"
+                    aria-controls="collapseThree"
+                  >
+                    Какие направления предлагает «ЛИК ТУР»?
+                  </button>
+                </h2>
+                <div
+                  id="collapseThree"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingThree"
+                  data-bs-parent="#accordionExample"
+                >
+                  <div class="accordion-body">
+                    🌴 Пляжный отдых –
+                    <strong>Тайланд, Египет, ОАЭ, Вьетнам и др.</strong>,
+                    <br />🏰 Экскурсионные туры –
+                    <strong>Европа, Китай, Япония, Турция.</strong> <br />❄️
+                    Горнолыжные курорты –
+                    <strong>Россия, Казахстан, Андорра.</strong> <br />✈️
+                    Экзотика и приключения –<strong
+                      >Доминикана, Мальдивы.</strong
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <div class="info-table">
+              <ul>
+                <li>
+                  <img
+                    src="{% static 'LikTour/images/info-icon-01.png' %}"
+                    alt=""
+                    style="max-width: 52px"
+                  />
+                  <h4>
+                    Широкий выбор<br /><span
+                      >Предоставляем туры в различные страны и отели мира</span
+                    >
+                  </h4>
+                </li>
+                <li>
+                  <img
+                    src="{% static 'LikTour/images/info-icon-02.png' %}"
+                    alt=""
+                    style="max-width: 52px"
+                  />
+                  <h4>
+                    Скорость работы<br /><span
+                      >Мы работаем быстро и оперативно, а так же всегда готовы
+                      оказать помощь</span
+                    >
+                  </h4>
+                </li>
+                <li>
+                  <img
+                    src="{% static 'LikTour/images/info-icon-03.png' %}"
+                    alt=""
+                    style="max-width: 52px"
+                  />
+                  <h4>
+                    Лучшие отели<br /><span
+                      >Мы работаем только с провереными отелями с наилучшим
+                      сервисом</span
+                    >
+                  </h4>
+                </li>
+                <li>
+                  <img
+                    src="{% static 'LikTour/images/info-icon-04.png' %}"
+                    alt=""
+                    style="max-width: 52px"
+                  />
+                  <h4>
+                    Отличные цены<br /><span
+                      >Мы предоставляем удобную систему оплату и выгодные
+                      ценовые предложения</span
+                    >
+                  </h4>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Новости из index.html -->
+    <div class="properties section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <div class="section1">
+              <div class="section-heading1">
+                <h1>Новости</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section class="service_section layout_padding">
+          <div class="service_container">
+            <div class="container">
+              <div class="row">
+                {% for news_item in news_list %}
+                  <div class="col-md-4">
+                    <div class="box">
+                      <div class="detail-box">
+                        <h5>{{ news_item.title }}</h5>
+                        <p>{{ news_item.description }}</p>
+                        <a href="{% url 'news_detail' news_item.news.id %}">Читать далее</a>
+                      </div>
+                    </div>
+                  </div>
+                {% empty %}
+                  <div class="col-md-12">
+                    <p>Новостей пока нет.</p>
+                  </div>
+                {% endfor %}
+              </div>
+              <div class="btn-box">
+                <a href="{% url 'all_news' %}">Все новости</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Секция с турами -->
+    <div class="properties section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <div class="section">
+              <div class="section-heading">
+                <h6>
+                  Все цены действительны на момент публикации и носят
+                  информативный характер
+                </h6>
+                <h1>Актуальные открытые направления</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          {% for country_name, data in country_city_map.items %}
+            <!-- Баннер страны -->
+            <div class="row mt-3 banner-container">
+              <div class="col-12">
+                <div class="destination-banner">
+                  <div class="banner-click-area">
+                    {% if data.photo %}
+                      <img src="{{ data.photo }}" alt="{{ country_name }}" class="img-fluid banner-img" />
+                    {% else %}
+                      <img src="{% static 'LikTour/images/default_country.jpg' %}" alt="{{ country_name }}" class="img-fluid banner-img" />
+                    {% endif %}
+                    <div class="banner-overlay">
+                      <h2 class="banner-title">{{ country_name }}</h2>
+                    </div>
+                  </div>
+                </div>
+                <!-- Города -->
+                <div class="subcategories-grid">
+                  {% for city in data.cities %}
+                    <a href="{% url 'city_detail' city.id %}" class="subcategory-item">
+                      {% if city.city_photo %}
+                        <img src="{{ city.city_photo.url }}" alt="{{ city.name }}" class="subcategory-img" />
+                      {% else %}
+                        <img src="{% static 'LikTour/images/default_city.jpg' %}" alt="{{ city.name }}" class="subcategory-img" />
+                      {% endif %}
+                      <div class="subcategory-overlay">
+                        <h3 class="subcategory-title">{{ city.name }}</h3>
+                      </div>
+                    </a>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Секция с контактами -->
+    <div class="contact-page section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="section-heading1">
+              <h6>| Контакты</h6>
+            </div>
+            <p>
+              <strong>Телефоны:</strong><br />
+              <a href="tel:+73022263060">26-30-60</a>;<br />
+              <a href="tel:+73022359299">35-92-99</a>;<br />
+              <a href="tel:+79141423955">8-914-142-39-55</a>.<br />
+              <br />
+              <strong>Адрес:</strong> Чита, улица Ленинградская, 56, пом.2<br />
+              <br /><strong>Режим работы офиса:</strong><br />
+              Пн-пт: 10:00-19:00,<br />
+              Суббота: 11:00-17:00 <br />Воскресенье: выходной
+            </p>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="item phone">
+                  <img
+                    src="{% static 'LikTour/images/phone-icon.png' %}"
+                    alt=""
+                    style="max-width: 52px"
+                  />
+                  <h6>
+                    <a href="tel:+79141423955">8-914-142-39-55</a><br /><span
+                      >Телефон</span
+                    >
+                  </h6>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="item email">
+                  <img
+                    src="{% static 'LikTour/images/email-icon.png' %}"
+                    alt=""
+                    style="max-width: 52px"
+                  />
+                  <h6>
+                    <a href="mailto:lik-tour@yandex.ru">lik-tour@yandex.ru</a>
+                    <br />
+                    <span>Email</span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <form id="contact-form" action="" method="post">
+              {% csrf_token %}
+              <div class="section-heading1">
+                <h6 style="margin: 0 auto; display: inline-block">| Задать вопрос менеджеру:</h6>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <fieldset>
+                    {{ form.name.label_tag }}
+                    {{ form.name }}
+                    {{ form.name.errors }}
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    {{ form.telephone_number.label_tag }}
+                    {{ form.telephone_number }}
+                    {{ form.telephone_number.errors }}
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    {{ form.message_subject.label_tag }}
+                    {{ form.message_subject }}
+                    {{ form.message_subject.errors }}
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    {{ form.message.label_tag }}
+                    {{ form.message }}
+                    {{ form.message.errors }}
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="submit" id="form-submit" class="orange-button">
+                      Отправить сообщение
+                    </button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-12">
+            <div id="map">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d845.320991036619!2d113.50430402861072!3d52.03480699823886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5dca354a5cd3188b%3A0x4a1286091ad4c97!2z0JvQuNC6LdGC0YPRgA!5e1!3m2!1sen!2sth!4v1742990578359!5m2!1sen!2sth"
+                width="100%"
+                height="500px"
+                frameborder="0"
+                style="
+                  border: 0;
+                  border-radius: 10px;
+                  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+                "
+                allowfullscreen=""
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <!-- Первая колонка - Логотип и соцсети -->
+          <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+            <a href="{% url 'main_page' %}" class="logo">
+              <img
+                src="{% static 'LikTour/images/logotip.svg' %}"
+                alt="logo"
+                class="logotip-img"
+              />
+            </a>
+            <div class="footer-social d-flex">
+              <a
+                href="https://t.me/NataliyaBelimova?text=Здравствуйте,%20я%20по%20поводу..."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fab fa-telegram"></i>
+              </a>
+              <a
+                href="https://wa.me/79141423955?text=Здравствуйте,%20я%20по%20поводу..."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+            <p class="footer-copyright">
+              © 2025 официальный сайт турфирмы ЛИК-ТУР
+            </p>
+          </div>
+
+          <!-- Вторая колонка - Направления -->
+          <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+            <div class="text-fyter">Направления</div>
+            <br />
+            <ul class="footer-links">
+              <li><a href="{% url 'properties' %}">Все туры</a></li>
+              <li>
+                <a href="tel:+79141423955"> Получить онлайн консультацию</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Третья колонка - Информация -->
+          <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+            <div class="text-fyter">Информация</div>
+            <br />
+            <ul class="footer-links">
+              <li><a href="{% url 'about_us' %}">О нас</a></li>
+              <li><a href="{% url 'contact_with_us' %}">Контакты</a></li>
+              <li><a href="{% url 'all_news' %}">Новости</a></li>
+            </ul>
+          </div>
+
+          <!-- Четвертая колонка - Персональные данные -->
+          <div class="col-lg-3 col-md-6">
+            <div class="text-fyter">Персональные данные</div>
+            <br />
+            <ul class="footer-links">
+              <li>
+                <a href="{% url 'our_policy' %}">Политика обработки персональных данных</a>
+              </li>
+              <li>
+                <a href="{% url 'agreement' %}"
+                  >Согласие на обработку персональных данных</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Инициализация Owl Carousel для баннеров
+        $(".owl-banner").owlCarousel({
+          items: 1,
+          loop: true,
+          autoplay: true,
+          autoplayTimeout: 5000,
+          autoplayHoverPause: true,
+          nav: true,
+          dots: true,
+          animateOut: "fadeOut",
+          smartSpeed: 1000,
+        });
+
+        // Скрываем все подкатегории при загрузке страницы
+        $(".subcategories-grid").hide();
+
+        $(".banner-click-area").click(function () {
+          // Находим контейнер подкатегорий для этого баннера
+          var subcategories = $(this)
+            .closest(".banner-container")
+            .find(".subcategories-grid");
+
+          // Закрываем все другие открытые подкатегории
+          $(".subcategories-grid").not(subcategories).slideUp(300);
+
+          // Переключаем текущие подкатегории
+          subcategories.slideToggle(300, function () {
+            // Плавное появление содержимого после завершения анимации
+            if ($(this).is(":visible")) {
+              $(this).css("display", "grid");
+            }
+          });
+        });
+      });
+    </script>
+    <script src="{% static 'LikTour/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'LikTour/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'LikTour/js/isotope.min.js' %}"></script>
+    <script src="{% static 'LikTour/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'LikTour/js/counter.js' %}"></script>
+    <script src="{% static 'LikTour/js/custom.js' %}"></script>
+  </body>
+</html>
