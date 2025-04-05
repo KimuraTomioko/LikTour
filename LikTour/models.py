@@ -83,6 +83,7 @@ class News(models.Model):
     title = models.CharField(max_length=45, verbose_name='Заголовок новости')
     description = models.TextField(max_length=145, verbose_name='Описание новости')
     news = models.ForeignKey(AboutNewsPage, on_delete=models.PROTECT, null=True, blank=True, verbose_name='Новость')
+    is_pinned = models.BooleanField(default=False, verbose_name='Закрепить новость')  # Новое поле
 
     def __str__(self):
         return f"{self.title} - {self.description}"
@@ -90,6 +91,14 @@ class News(models.Model):
     class Meta:
         verbose_name = 'Новость блоком'
         verbose_name_plural = 'Новости блоком'
+
+    # Ограничение: не более 3 закреплённых новостей
+    def save(self, *args, **kwargs):
+        if self.is_pinned:
+            pinned_count = News.objects.filter(is_pinned=True).exclude(id=self.id).count()
+            if pinned_count >= 3:
+                raise ValueError("Нельзя закрепить больше 3 новостей.")
+        super().save(*args, **kwargs)
 
 class Banner(models.Model):
     title = models.CharField(max_length=100, verbose_name='Заголовок баннера')

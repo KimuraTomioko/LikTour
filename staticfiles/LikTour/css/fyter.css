@@ -1,0 +1,116 @@
+footer {
+  background-color: #1e1e1e;
+  color: #fff;
+  padding: 60px 0 30px;
+  font-family: "Poppins", sans-serif;
+}
+
+.footer-logo {
+  max-width: 180px;
+  margin-bottom: 20px;
+}
+
+.footer-social {
+  margin: 20px 0;
+}
+
+.footer-social a {
+  color: #fff;
+  font-size: 20px;
+  margin-right: 15px;
+  transition: color 0.3s;
+}
+
+.footer-social a:hover {
+  color: #f35525;
+}
+
+.footer-copyright {
+  color: #fff;
+  font-size: 11px;
+  opacity: 0.7;
+  margin-right: 57px;
+}
+
+.footer-column h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #f35525;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-column h4::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #f35525;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: #fff;
+  opacity: 0.8;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.footer-links a:hover {
+  color: #f35525;
+  opacity: 1;
+  padding-left: 5px;
+}
+
+/* Адаптивные стили */
+@media (max-width: 992px) {
+  .footer-column {
+    margin-bottom: 40px;
+  }
+
+  .footer-logo {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  footer {
+    padding: 40px 0 20px;
+  }
+
+  .footer-column h4 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-column {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .footer-column h4::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+}

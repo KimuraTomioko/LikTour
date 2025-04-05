@@ -2215,3 +2215,24 @@ body {
     margin-right: 100px;
   }
 }
+
+.pinned-box {
+  border: 2px solid #28a745; /* Зелёная рамка для закреплённых */
+  background-color: #f8f9fa; /* Светлый фон */
+  border-radius: 5px;
+}
+
+.pinned-section {
+  margin-bottom: 20px; /* Отступ между закреплёнными и обычными новостями */
+}
+
+.regular-section {
+  margin-top: 20px; /* Дополнительный отступ сверху для обычных новостей */
+}
+
+.badge {
+  font-size: 0.8rem;
+  vertical-align: middle;
+}
+
+

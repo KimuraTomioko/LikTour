@@ -3,7 +3,7 @@ from .views import *
 
 urlpatterns = [
     path('', index, name='main_page'),
-    path('city/<int:city_id>/', city_detail, name='city_detail'),
+    path('city/<slug:city_slug>/', city_detail, name='city_detail'),
     path('all-tours/', all_tours, name='properties'),
     path('all-news/', all_news, name='all_news'),
     path('news/<int:news_id>', news_detail, name='news_detail'),

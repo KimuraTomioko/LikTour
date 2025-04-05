@@ -15,7 +15,8 @@ def index(request):
             }
         country_city_map[country_name]['cities'].extend(country_tour.cities.all())
 
-    news_list = News.objects.select_related('news')[:3]
+    # Только 3 закреплённые новости для главной страницы
+    news_list = News.objects.select_related('news').filter(is_pinned=True)[:3]
     banners = Banner.objects.all()  # Получаем все баннеры
 
     question_form = QuestionForm(request.POST or None)
@@ -37,7 +38,6 @@ def city_detail(request, city_id):
     city = get_object_or_404(Cities, id=city_id)
     country_tour = CountryTour.objects.filter(cities=city).first()  # Получаем объект CountryTour
 
-    # Инициализируем форму один раз
     form = SmallContactForm(request.POST or None)
     
     if request.method == 'POST':
@@ -72,11 +72,15 @@ def all_tours(request):
     return render(request, 'LikTour/properties.html', context)
 
 def all_news(request):
-    news_list = News.objects.select_related('news').all()
-    context = {
-        'news_list': news_list
-    }
+    # Закреплённые новости (до 3)
+    pinned_news = News.objects.select_related('news').filter(is_pinned=True)[:3]
+    # Обычные новости, отсортированные по дате (новые сверху)
+    regular_news = News.objects.select_related('news').filter(is_pinned=False).order_by('-id')
 
+    context = {
+        'pinned_news': pinned_news,
+        'regular_news': regular_news
+    }
     return render(request, 'LikTour/all-news.html', context)
 
 def news_detail(request, news_id):

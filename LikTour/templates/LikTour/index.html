@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{% static 'LikTour/css/baner.css' %}" />
     <link rel="stylesheet" href="{% static 'LikTour/css/fyter.css' %}" />
     <link rel="stylesheet" href="{% static 'LikTour/css/news.css' %}" />
+    <link rel="stylesheet" href="{%static 'LikTour/css/page_sities.css' %}" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
@@ -122,7 +123,6 @@ https://templatemo.com/tm-591-villa-agency
       </div>
     </header>
     <!-- ***** Header Area End ***** -->
-
     <div class="main-banner">
       <div class="owl-carousel owl-banner">
         {% for banner in banners %}
@@ -450,7 +450,6 @@ https://templatemo.com/tm-591-villa-agency
       });
     </script>
 
-    <!-- карта -->
     <div class="contact section">
       <div class="container">
         <div class="row">
@@ -463,10 +462,10 @@ https://templatemo.com/tm-591-villa-agency
       </div>
     </div>
 
-    <div class="contact-content">
+    <div class="contact-content section">
       <div class="container">
         <div class="row">
-          <div class="col-lg-7">
+          <div class="col-lg-6">
             <div id="map">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d845.320991036619!2d113.50430402861072!3d52.03480699823886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5dca354a5cd3188b%3A0x4a1286091ad4c97!2z0JvQuNC6LdGC0YPRgA!5e1!3m2!1sen!2sth!4v1742990578359!5m2!1sen!2sth"
@@ -477,18 +476,18 @@ https://templatemo.com/tm-591-villa-agency
                 allowfullscreen=""
               ></iframe>
             </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="item phone" onclick="window.location.href='tel:89145007455'" style="cursor: pointer">
-                  <img src="{% static 'LikTour/images/phone-icon.png' %}" alt="Позвонить" style="max-width: 52px" />
+            <div class="row mt-4">
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="item phone" onclick="window.location.href='tel:89145007455'" style="cursor: pointer;">
+                  <img src="{% static 'LikTour/images/phone-icon.png' %}" alt="Позвонить" style="max-width: 52px;" />
                   <h6>
                     <a href="tel:+79141423955">8-914-142-39-55</a><br /><span>Телефон</span>
                   </h6>
                 </div>
               </div>
-              <div class="col-lg-6">
+              <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="item email">
-                  <img src="{% static 'LikTour/images/email-icon.png' %}" alt="" style="max-width: 52px" />
+                  <img src="{% static 'LikTour/images/email-icon.png' %}" alt="" style="max-width: 52px;" />
                   <h6>
                     <a href="mailto:lik-tour@yandex.ru">lik-tour@yandex.ru</a><br /><span>Email</span>
                   </h6>
@@ -496,11 +495,11 @@ https://templatemo.com/tm-591-villa-agency
               </div>
             </div>
           </div>
-          <div class="col-lg-5">
+          <div class="col-lg-6">
             <form id="contact-form" action="" method="post">
               {% csrf_token %}
               <div class="section-heading1">
-                <h6 style="margin: 0 auto; display: inline-block">| Задать вопрос менеджеру:</h6>
+                <h6 style="margin: 0 auto; display: inline-block;">| Задать вопрос менеджеру:</h6>
               </div>
               <div class="row">
                 <div class="col-lg-12">
@@ -551,10 +550,9 @@ https://templatemo.com/tm-591-villa-agency
         </div>
       </div>
     </div>
-
-    <footer>
-      <div class="container">
-        <div class="row">
+    <footer class="footer-full-width">
+      <div class="container-fluid">
+        <div class="row align-items-start">
           <!-- Первая колонка - Логотип и соцсети -->
           <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
             <a href="{% url 'main_page' %}" class="logo">
@@ -564,7 +562,7 @@ https://templatemo.com/tm-591-villa-agency
                 class="logotip-img"
               />
             </a>
-            <div class="footer-social d-flex">
+            <div class="footer-social d-flex mt-3">
               <a
                 href="https://t.me/NataliyaBelimova?text=Здравствуйте,%20я%20по%20поводу..."
                 target="_blank"
@@ -580,46 +578,39 @@ https://templatemo.com/tm-591-villa-agency
                 <i class="fab fa-whatsapp"></i>
               </a>
             </div>
-            <p class="footer-copyright">
+            <p class="footer-copyright mt-3">
               © 2025 официальный сайт турфирмы ЛИК-ТУР
             </p>
           </div>
-
+    
           <!-- Вторая колонка - Направления -->
           <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
             <div class="text-fyter">Направления</div>
-            <br />
-            <ul class="footer-links">
+            <ul class="footer-links mt-3">
               <li><a href="{% url 'properties' %}">Все туры</a></li>
-              <li>
-                <a href="tel:+79141423955"> Получить онлайн консультацию</a>
-              </li>
+              <li><a href="tel:+79141423955">Получить онлайн консультацию</a></li>
             </ul>
           </div>
-
-          <!-- Третья колонка - Направления -->
+    
+          <!-- Третья колонка - Информация -->
           <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
             <div class="text-fyter">Информация</div>
-            <br />
-            <ul class="footer-links">
+            <ul class="footer-links mt-3">
               <li><a href="{% url 'about_us' %}">О нас</a></li>
               <li><a href="{% url 'contact_with_us' %}">Контакты</a></li>
               <li><a href="{% url 'all_news' %}">Новости</a></li>
             </ul>
           </div>
-
-          <!-- Четвертая колонка - Информация -->
+    
+          <!-- Четвёртая колонка - Персональные данные -->
           <div class="col-lg-3 col-md-6">
             <div class="text-fyter">Персональные данные</div>
-            <br />
-            <ul class="footer-links">
+            <ul class="footer-links mt-3">
               <li>
                 <a href="{% url 'our_policy' %}">Политика обработки персональных данных</a>
               </li>
               <li>
-                <a href="{% url 'agreement' %}"
-                  >Согласие на обработку персональных данных</a
-                >
+                <a href="{% url 'agreement' %}">Согласие на обработку персональных данных</a>
               </li>
             </ul>
           </div>
