@@ -6,14 +6,15 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class Cities(models.Model):
     name = models.CharField(max_length=30, verbose_name = 'Название города')
-    description = models.TextField(max_length=500, verbose_name='Описание города')
-    cuisine = models.TextField(max_length=1200, verbose_name='Кухня')
+    description = models.TextField(max_length=340, verbose_name='Описание города')
+    cuisine = models.TextField(max_length=340, verbose_name='Кухня')
     photo_cuisine = models.ImageField(upload_to='image/%Y/%m/%d', null=True, blank=True, verbose_name='Фотография кухни страны/города')
-    what_to_see = models.TextField(max_length=1200, verbose_name='Что посмотреть')
+    what_to_see = models.TextField(max_length=340, verbose_name='Что посмотреть')
     photo_what_to_see = models.ImageField(upload_to='image/%Y/%m/%d', null=True, blank=True, verbose_name='Фотография достопремичательностей страны/города')
-    when_is_the_season = models.TextField(max_length=1200, verbose_name='Когда сезон?')
+    when_is_the_season = models.TextField(max_length=340, verbose_name='Когда сезон?')
     photo_when_is_the_season = models.ImageField(upload_to='image/%Y/%m/%d', null=True, blank=True, verbose_name='Фото сезона страны/города')
-
+    city_photo = models.ImageField(upload_to='image/%Y/%m/%d', null=True, blank=True, verbose_name='Фотография города')
+    
     def __str__(self):
         return f"{self.name}"
     
@@ -62,13 +63,13 @@ class SmallContactForm(models.Model):
 class AboutNewsPage(models.Model):
     title = models.CharField(max_length=45, verbose_name='Заголовок новости в отдельной странице')
     first_title = models.CharField(max_length=45, blank=True, default='', verbose_name='Заголовок первого блока')
-    first_info = models.TextField(max_length=1200, verbose_name='Первый блок с новостью')
+    first_info = models.TextField(max_length=340, verbose_name='Первый блок с новостью')
     first_info_phoro = models.ImageField(upload_to='image/%Y/%m/%d', null=True, blank=True, verbose_name='Фотография для 1 блока с новостью на странице')
     second_title = models.CharField(max_length=45, blank=True, default='', verbose_name='Заголовок второго блока')
-    second_info = models.TextField(max_length=1200, verbose_name='Второй блок с новостью')
+    second_info = models.TextField(max_length=340, verbose_name='Второй блок с новостью')
     second_info_photo = models.ImageField(upload_to='image/%Y/%m/%d', null=True, blank=True, verbose_name='Фотография для 2 блока с новостью на странице')
     third_title = models.CharField(max_length=45, blank=True, default='', verbose_name='Заголовок третьего блока')
-    third_info = models.TextField(max_length=1200, verbose_name='Третий блок с новостью')
+    third_info = models.TextField(max_length=340, verbose_name='Третий блок с новостью')
     third_info_photo = models.ImageField(upload_to='image/%Y/%m/%d', null=True, blank=True, verbose_name='Фотография для 3 блока с новостью на странице')
 
     def __str__(self):

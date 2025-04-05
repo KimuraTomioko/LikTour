@@ -408,8 +408,8 @@ https://templatemo.com/tm-591-villa-agency
                 <div class="subcategories-grid">
                   {% for city in data.cities %}
                     <a href="{% url 'city_detail' city.id %}" class="subcategory-item">
-                      {% if city.photo_what_to_see %}
-                        <img src="{{ city.photo_what_to_see.url }}" alt="{{ city.name }}" class="subcategory-img" />
+                      {% if city.city_photo %}
+                        <img src="{{ city.city_photo.url }}" alt="{{ city.name }}" class="subcategory-img" />
                       {% else %}
                         <img src="{% static 'LikTour/images/default_city.jpg' %}" alt="{{ city.name }}" class="subcategory-img" />
                       {% endif %}
