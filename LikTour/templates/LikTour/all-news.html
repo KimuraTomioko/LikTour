@@ -152,155 +152,21 @@ https://templatemo.com/tm-591-villa-agency
           <div class="service_container">
             <div class="container">
               <div class="row">
-                <div class="col-md-4">
-                  <div class="box">
-                    <div class="detail-box">
-                      <h5>Открытие нового направления!</h5>
-                      <p>
-                        Турагентство «Лик-Тур» радо представить уникальное
-                        направление — путешествия на необитаемые острова!
-                        Погрузитесь в атмосферу дикой природы, кристально чистые
-                        воды и белоснежные ...
-                      </p>
-                      <a href="news-page.html"> Читать далее </a>
+                {% for news_item in news_list %}
+                  <div class="col-md-4">
+                    <div class="box">
+                      <div class="detail-box">
+                        <h5>{{ news_item.title }}</h5>
+                        <p>{{ news_item.description }}</p>
+                        <a href="{% url 'news_detail' news_item.news.id %}">Читать далее</a>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="box">
-                    <div class="detail-box">
-                      <h5>Акция «Чтобы помнили»</h5>
-                      <p>
-                        "тут нужно. писат ,примерно 150сивол вывод первых 150
-                        слов elit. Nullam auctor, nisl eget ultricies tincidunt,
-                        nisl nisl aliquam nisl, eget ultricies nisl nisl eget
-                        nisl. Nullam auctor, nisl eget ultricies ultricies
-                        ultricies"...
-                      </p>
-                      <a href="news-page.html"> Читать далее </a>
-                    </div>
+                {% empty %}
+                  <div class="col-md-12">
+                    <p>Новостей пока нет.</p>
                   </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="box">
-                    <div class="detail-box">
-                      <h5>Доступная среда</h5>
-                      <p>
-                        "тут нужно. писат ,примерно 150сивол вывод первых 150
-                        слов elit. Nullam auctor, nisl eget ultricies tincidunt,
-                        nisl nisl aliquam nisl, eget ultricies nisl nisl eget
-                        nisl. Nullam auctor, nisl eget ultricies ultricies
-                        ultricies"...
-                      </p>
-                      <a href="news-page.html"> Читать далее </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="box">
-                    <div class="detail-box">
-                      <h5>Доступная среда</h5>
-                      <p>
-                        "тут нужно. писат ,примерно 150сивол вывод первых 150
-                        слов elit. Nullam auctor, nisl eget ultricies tincidunt,
-                        nisl nisl aliquam nisl, eget ultricies nisl nisl eget
-                        nisl. Nullam auctor, nisl eget ultricies ultricies
-                        ultricies"...
-                      </p>
-                      <a href="news-page.html"> Читать далее </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="box">
-                    <div class="detail-box">
-                      <h5>Доступная среда</h5>
-                      <p>
-                        "тут нужно. писат ,примерно 150сивол вывод первых 150
-                        слов elit. Nullam auctor, nisl eget ultricies tincidunt,
-                        nisl nisl aliquam nisl, eget ultricies nisl nisl eget
-                        nisl. Nullam auctor, nisl eget ultricies ultricies
-                        ultricies"...
-                      </p>
-                      <a href="news-page.html"> Читать далее </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="box">
-                    <div class="detail-box">
-                      <h5>Доступная среда</h5>
-                      <p>
-                        "тут нужно. писат ,примерно 150сивол вывод первых 150
-                        слов elit. Nullam auctor, nisl eget ultricies tincidunt,
-                        nisl nisl aliquam nisl, eget ultricies nisl nisl eget
-                        nisl. Nullam auctor, nisl eget ultricies ultricies
-                        ultricies"...
-                      </p>
-                      <a href="news-page.html"> Читать далее </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="box">
-                    <div class="detail-box">
-                      <h5>Доступная среда</h5>
-                      <p>
-                        "тут нужно. писат ,примерно 150сивол вывод первых 150
-                        слов elit. Nullam auctor, nisl eget ultricies tincidunt,
-                        nisl nisl aliquam nisl, eget ultricies nisl nisl eget
-                        nisl. Nullam auctor, nisl eget ultricies ultricies
-                        ultricies"...
-                      </p>
-                      <a href="news-page.html"> Читать далее </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="box">
-                    <div class="detail-box">
-                      <h5>Доступная среда</h5>
-                      <p>
-                        "тут нужно. писат ,примерно 150сивол вывод первых 150
-                        слов elit. Nullam auctor, nisl eget ultricies tincidunt,
-                        nisl nisl aliquam nisl, eget ultricies nisl nisl eget
-                        nisl. Nullam auctor, nisl eget ultricies ultricies
-                        ultricies"...
-                      </p>
-                      <a href="news-page.html"> Читать далее </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="box">
-                    <div class="detail-box">
-                      <h5>Доступная среда</h5>
-                      <p>
-                        "тут нужно. писат ,примерно 150сивол вывод первых 150
-                        слов elit. Nullam auctor, nisl eget ultricies tincidunt,
-                        nisl nisl aliquam nisl, eget ultricies nisl nisl eget
-                        nisl. Nullam auctor, nisl eget ultricies ultricies
-                        ultricies"...
-                      </p>
-                      <a href="news-page.html"> Читать далее </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="box">
-                    <div class="detail-box">
-                      <h5>Доступная среда</h5>
-                      <p>
-                        "тут нужно. писат ,примерно 150сивол вывод первых 150
-                        слов elit. Nullam auctor, nisl eget ultricies tincidunt,
-                        nisl nisl aliquam nisl, eget ultricies nisl nisl eget
-                        nisl. Nullam auctor, nisl eget ultricies ultricies
-                        ultricies"...
-                      </p>
-                      <a href="news-page.html"> Читать далее </a>
-                    </div>
-                  </div>
-                </div>
+                {% endfor %}
               </div>
             </div>
           </div>

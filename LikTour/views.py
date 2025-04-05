@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import CountryTour, Cities, SmallContactForm
+from .models import *
 from django.contrib import messages
 from .forms import *
 
@@ -14,7 +14,9 @@ def index(request):
                 'cities': []
             }
         country_city_map[country_name]['cities'].extend(country_tour.cities.all())
-    
+
+    news_list = News.objects.select_related('news').all()[:3]
+
     if request.method == 'POST':
         question_form = QuestionForm(request.POST)
         if question_form.is_valid():
@@ -23,14 +25,16 @@ def index(request):
         else:
             context = {
                 'country_city_map': country_city_map,
-                'form': question_form
+                'form': question_form,
+                'news_list': news_list
             }
             return render(request, 'LikTour/index.html', context)
     else:
         question_form = QuestionForm()
         context = {
             'country_city_map': country_city_map,
-            'form': question_form
+            'form': question_form,
+            'news_list': news_list
         }
         return render(request, 'LikTour/index.html', context)
 
@@ -73,13 +77,33 @@ def all_tours(request):
     return render(request, 'LikTour/properties.html', context)
 
 def all_news(request):
-    return render(request, 'LikTour/all-news.html')
+    news_list = News.objects.select_related('news').all()
+    context = {
+        'news_list': news_list
+    }
+
+    return render(request, 'LikTour/all-news.html', context)
+
+def news_detail(request, news_id):
+    news_page = get_object_or_404(AboutNewsPage, id=news_id)
+    context = {
+        'news_page': news_page
+    }
+    return render(request, 'LikTour/news-detail.html', context)
 
 def about_us(request):
     return render(request, 'LikTour/property-details.html')
 
 def contact_with_us(request):
-    return render(request, 'LikTour/contact.html')
+    form = QuestionForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('contact_with_us')
+    
+    context = {
+        'form': form
+    }
+    return render(request, 'LikTour/contact.html', context)
 
 def our_policy(request):
     return render(request, 'LikTour/policy.html')

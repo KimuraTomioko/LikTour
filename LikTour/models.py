@@ -24,7 +24,7 @@ class Cities(models.Model):
 class CountryTour(models.Model):
     country = models.CharField(max_length=30, verbose_name='Название страны')
     country_photo = models.ImageField(upload_to='image/%Y/%m/%d', blank=True, null=True, verbose_name='Картинка страны')
-    cities = models.ManyToManyField(Cities, verbose_name='Названия городов')
+    cities = models.ManyToManyField(Cities, null=True, blank=True, verbose_name='Названия городов')
 
     def __str__(self):
         return f"{self.country} -- {', '.join(city.name for city in self.cities.all())}"
@@ -61,10 +61,13 @@ class SmallContactForm(models.Model):
 
 class AboutNewsPage(models.Model):
     title = models.CharField(max_length=45, verbose_name='Заголовок новости в отдельной странице')
+    first_title = models.CharField(max_length=45, blank=True, default='', verbose_name='Заголовок первого блока')
     first_info = models.TextField(max_length=1200, verbose_name='Первый блок с новостью')
     first_info_phoro = models.ImageField(upload_to='image/%Y/%m/%d', null=True, blank=True, verbose_name='Фотография для 1 блока с новостью на странице')
+    second_title = models.CharField(max_length=45, blank=True, default='', verbose_name='Заголовок второго блока')
     second_info = models.TextField(max_length=1200, verbose_name='Второй блок с новостью')
     second_info_photo = models.ImageField(upload_to='image/%Y/%m/%d', null=True, blank=True, verbose_name='Фотография для 2 блока с новостью на странице')
+    third_title = models.CharField(max_length=45, blank=True, default='', verbose_name='Заголовок третьего блока')
     third_info = models.TextField(max_length=1200, verbose_name='Третий блок с новостью')
     third_info_photo = models.ImageField(upload_to='image/%Y/%m/%d', null=True, blank=True, verbose_name='Фотография для 3 блока с новостью на странице')
 
@@ -78,7 +81,7 @@ class AboutNewsPage(models.Model):
 class News(models.Model):
     title = models.CharField(max_length=45, verbose_name='Заголовок новости')
     description = models.TextField(max_length=145, verbose_name='Описание новости')
-    news = models.ForeignKey(AboutNewsPage, on_delete=models.PROTECT, verbose_name='Новость')
+    news = models.ForeignKey(AboutNewsPage, on_delete=models.PROTECT, null=True, blank=True, verbose_name='Новость')
 
     def __str__(self):
         return f"{self.title} - {self.description}"

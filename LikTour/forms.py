@@ -14,11 +14,11 @@ class QuestionForm(forms.ModelForm):
             'message'
         )
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'telephone_number': RegionalPhoneNumberWidget(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'message_subject': forms.TextInput(attrs={'class': 'form-control'}),
-            'message': forms.Textarea(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Ваше имя...'}),
+            'telephone_number': RegionalPhoneNumberWidget(attrs={'class': 'form-control', 'placeholder':'Ваш номер телефона...'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder':'Ваш email...'}),
+            'message_subject': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Тема сообщения...'}),
+            'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder':'Ваше сообщение...'}),
         }
 
 class SmallContactForm(forms.ModelForm):
