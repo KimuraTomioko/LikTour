@@ -502,45 +502,24 @@ https://templatemo.com/tm-591-villa-agency
                 width="100%"
                 height="500px"
                 frameborder="0"
-                style="
-                  border: 0;
-                  border-radius: 10px;
-                  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
-                "
+                style="border: 0; border-radius: 10px; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);"
                 allowfullscreen=""
               ></iframe>
             </div>
             <div class="row">
               <div class="col-lg-6">
-                <div
-                  class="item phone"
-                  onclick="window.location.href='tel:89145007455'"
-                  style="cursor: pointer"
-                >
-                  <img
-                    src="{% static 'LikTour/images/phone-icon.png' %}"
-                    alt="Позвонить"
-                    style="max-width: 52px"
-                    onclick="window.location.href='tel:89145007455'"
-                  />
+                <div class="item phone" onclick="window.location.href='tel:89145007455'" style="cursor: pointer">
+                  <img src="{% static 'LikTour/images/phone-icon.png' %}" alt="Позвонить" style="max-width: 52px" />
                   <h6>
-                    <a href="tel:+79141423955">8-914-142-39-55</a><br /><span
-                      >Телефон</span
-                    >
+                    <a href="tel:+79141423955">8-914-142-39-55</a><br /><span>Телефон</span>
                   </h6>
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="item email">
-                  <img
-                    src="{% static 'LikTour/images/email-icon.png' %}"
-                    alt=""
-                    style="max-width: 52px"
-                  />
+                  <img src="{% static 'LikTour/images/email-icon.png' %}" alt="" style="max-width: 52px" />
                   <h6>
-                    <a href="mailto:lik-tour@yandex.ru">lik-tour@yandex.ru</a>
-                    <br />
-                    <span>Email</span>
+                    <a href="mailto:lik-tour@yandex.ru">lik-tour@yandex.ru</a><br /><span>Email</span>
                   </h6>
                 </div>
               </div>
@@ -548,81 +527,49 @@ https://templatemo.com/tm-591-villa-agency
           </div>
           <div class="col-lg-5">
             <form id="contact-form" action="" method="post">
+              {% csrf_token %}
               <div class="section-heading1">
-                <h6 style="margin: 0 auto; display: inline-block">
-                  | Задать вопрос менеджеру:
-                </h6>
+                <h6 style="margin: 0 auto; display: inline-block">| Задать вопрос менеджеру:</h6>
               </div>
               <div class="row">
                 <div class="col-lg-12">
                   <fieldset>
-                    <label for="name">Как к вам обращаться?</label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      placeholder="Ваше имя..."
-                      autocomplete="name"
-                      required
-                    />
+                    {{ form.name.label_tag }}
+                    {{ form.name }}
+                    {{ form.name.errors }}
                   </fieldset>
                 </div>
                 <div class="col-lg-12">
                   <fieldset>
-                    <label for="phone">Номер телефона</label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      id="phone"
-                      placeholder="Ваш телефон..."
-                      autocomplete="tel"
-                      required
-                    />
+                    {{ form.telephone_number.label_tag }}
+                    {{ form.telephone_number }}
+                    {{ form.telephone_number.errors }}
                   </fieldset>
                 </div>
                 <div class="col-lg-12">
                   <fieldset>
-                    <label for="email">Email</label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      placeholder="Ваш email..."
-                      autocomplete="email"
-                      required
-                    />
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {{ form.email.errors }}
                   </fieldset>
                 </div>
                 <div class="col-lg-12">
                   <fieldset>
-                    <label for="subject">Тема</label>
-                    <input
-                      type="text"
-                      name="subject"
-                      id="subject"
-                      placeholder="Тема сообщения..."
-                      autocomplete="off"
-                    />
+                    {{ form.message_subject.label_tag }}
+                    {{ form.message_subject }}
+                    {{ form.message_subject.errors }}
                   </fieldset>
                 </div>
                 <div class="col-lg-12">
                   <fieldset>
-                    <label for="message">Сообщение</label>
-                    <textarea
-                      name="message"
-                      id="message"
-                      placeholder="Ваше сообщение..."
-                      rows="6"
-                    ></textarea>
+                    {{ form.message.label_tag }}
+                    {{ form.message }}
+                    {{ form.message.errors }}
                   </fieldset>
                 </div>
                 <div class="col-lg-12">
                   <fieldset>
-                    <button
-                      type="submit"
-                      id="form-submit"
-                      class="orange-button"
-                    >
+                    <button type="submit" id="form-submit" class="orange-button">
                       Отправить сообщение
                     </button>
                   </fieldset>

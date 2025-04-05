@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse_lazy
 from django.core.validators import MinValueValidator, MaxValueValidator
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Cities(models.Model):
@@ -34,7 +35,7 @@ class CountryTour(models.Model):
     
 class ContactForm(models.Model):
     name = models.CharField(max_length=20, blank=False, null=False, verbose_name='Имя')
-    telephone_number = models.CharField(max_length=15, verbose_name='Номер телефона')
+    telephone_number = PhoneNumberField(region='RU', verbose_name='Номер телефона')
     email = models.EmailField(max_length=50, blank=False, null=False, verbose_name='Электронная почта')
     message_subject = models.CharField(max_length=50, blank=False, null=False, verbose_name='Тема сообщения')
     message = models.TextField(max_length=1200, null=False, blank=False, verbose_name='Сообщение')
@@ -48,7 +49,7 @@ class ContactForm(models.Model):
 
 class SmallContactForm(models.Model):
     name = models.CharField(max_length=20, blank=False, null=False, verbose_name='Имя')
-    telephone_number = models.CharField(max_length=15, verbose_name='Номер телефона')
+    telephone_number = PhoneNumberField(region='RU', verbose_name='Номер телефона')
 
     def __str__(self):
         return f"{self.name} -- {self.telephone_number}"
