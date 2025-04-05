@@ -149,46 +149,42 @@ https://templatemo.com/tm-591-villa-agency
           </div>
         </div>
 
-    <div class="row">
-      {% for country_name, data in country_city_map.items %}
-        <!-- Баннер страны -->
-        <div class="row mt-3 banner-container">
-          <div class="col-12">
-            <div class="destination-banner">
-              <div class="banner-click-area">
-                {% if data.photo %}
-                  <img src="{{ data.photo }}" alt="{{ country_name }}" class="img-fluid banner-img" />
-                {% else %}
-                  <img src="{% static 'LikTour/images/default_country.jpg' %}" alt="{{ country_name }}" class="img-fluid banner-img" />
-                {% endif %}
-                <div class="banner-overlay">
-                  <h2 class="banner-title">{{ country_name }}</h2>
+        <div class="row">
+          {% for country_name, data in country_city_map.items %}
+            <!-- Баннер страны -->
+            <div class="row mt-3 banner-container">
+              <div class="col-12">
+                <div class="destination-banner">
+                  <div class="banner-click-area">
+                    {% if data.photo %}
+                      <img src="{{ data.photo }}" alt="{{ country_name }}" class="img-fluid banner-img" />
+                    {% else %}
+                      <img src="{% static 'LikTour/images/default_country.jpg' %}" alt="{{ country_name }}" class="img-fluid banner-img" />
+                    {% endif %}
+                    <div class="banner-overlay">
+                      <h2 class="banner-title">{{ country_name }}</h2>
+                    </div>
+                  </div>
+                </div>
+                <!-- Города -->
+                <div class="subcategories-grid">
+                  {% for city in data.cities %}
+                    <a href="{% url 'city_detail' city.id %}" class="subcategory-item">
+                      {% if city.city_photo %}
+                        <img src="{{ city.city_photo.url }}" alt="{{ city.name }}" class="subcategory-img" />
+                      {% else %}
+                        <img src="{% static 'LikTour/images/default_city.jpg' %}" alt="{{ city.name }}" class="subcategory-img" />
+                      {% endif %}
+                      <div class="subcategory-overlay">
+                        <h3 class="subcategory-title">{{ city.name }}</h3>
+                      </div>
+                    </a>
+                  {% endfor %}
                 </div>
               </div>
             </div>
-            <!-- Города -->
-            <div class="subcategories-grid">
-              {% for city in data.cities %}
-                <a href="{% url 'city_detail' city.id %}" class="subcategory-item">
-                  {% if city.photo_what_to_see %}
-                    <img src="{{ city.photo_what_to_see.url }}" alt="{{ city.name }}" class="subcategory-img" />
-                  {% else %}
-                    <img src="{% static 'LikTour/images/default_city.jpg' %}" alt="{{ city.name }}" class="subcategory-img" />
-                  {% endif %}
-                  <div class="subcategory-overlay">
-                    <h3 class="subcategory-title">{{ city.name }}</h3>
-                  </div>
-                </a>
-              {% endfor %}
-            </div>
-          </div>
+          {% endfor %}
         </div>
-      {% empty %}
-        <div class="col-12">
-          <p>Страны и города пока не добавлены.</p>
-        </div>
-      {% endfor %}
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
