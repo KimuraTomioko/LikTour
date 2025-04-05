@@ -125,27 +125,27 @@ https://templatemo.com/tm-591-villa-agency
 
     <div class="main-banner">
       <div class="owl-carousel owl-banner">
-        <div class="item item-1">
-          <div class="header-text">
-            <span class="category">В ТАЙЛАНД<em> ИЗ ЧИТЫ</em></span>
-            <h2>Тайланд -<br />Пляжи, экзотика – ваша мечта ждёт!</h2>
-            <a href="#" class="details-btn">ПОДРОБНЕЕ</a>
+        {% for banner in banners %}
+          <div class="item" style="background-image: url('{{ banner.image.url }}');">
+            <div class="header-text">
+              <span class="category">{{ banner.subtitle }}</span>
+              <h2>{{ banner.title }}</h2>
+              {% if banner.link %}
+                <a href="{{ banner.link }}" class="details-btn">ПОДРОБНЕЕ</a>
+              {% else %}
+                <a href="#" class="details-btn">ПОДРОБНЕЕ</a>
+              {% endif %}
+            </div>
           </div>
-        </div>
-        <div class="item item-2">
-          <div class="header-text">
-            <span class="category">В КИТАЙ<em> ИЗ ЧИТЫ</em></span>
-            <h2>Китай -<br />Великая история и яркие эмоции!</h2>
-            <a href="#" class="details-btn">ПОДРОБНЕЕ</a>
+        {% empty %}
+          <div class="item" style="background-image: url('{% static 'LikTour/images/default_banner.jpg' %}');">
+            <div class="header-text">
+              <span class="category">Нет баннеров</span>
+              <h2>Добавьте баннеры в админке</h2>
+              <a href="#" class="details-btn">ПОДРОБНЕЕ</a>
+            </div>
           </div>
-        </div>
-        <div class="item item-3">
-          <div class="header-text">
-            <span class="category">В ЕГИПЕТ<em> ИЗ ЧИТЫ</em></span>
-            <h2>Египет -<br />Загадки фараонов и золотые пляжи</h2>
-            <a href="#" class="details-btn">ПОДРОБНЕЕ</a>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
 

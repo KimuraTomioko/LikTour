@@ -91,6 +91,20 @@ class News(models.Model):
         verbose_name = 'Новость блоком'
         verbose_name_plural = 'Новости блоком'
 
+class Banner(models.Model):
+    title = models.CharField(max_length=100, verbose_name='Заголовок баннера')
+    subtitle = models.CharField(max_length=100, verbose_name='Подзаголовок баннера', blank=True)
+    image = models.ImageField(upload_to='banners/%Y/%m/%d', verbose_name='Изображение баннера')
+    link = models.URLField(max_length=200, blank=True, verbose_name='Ссылка на подробности')
+    order = models.PositiveIntegerField(default=0, verbose_name='Порядок отображения')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Баннер'
+        verbose_name_plural = 'Баннеры'
+        ordering = ['order']
 
 
 

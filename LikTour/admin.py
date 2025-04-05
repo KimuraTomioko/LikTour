@@ -41,7 +41,8 @@ class AdminNews(admin.ModelAdmin):
     list_display = ('title', 'description')
     list_display_links = ('title',)
 
-
-
-
-    
+@admin.register(Banner)
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ('title', 'subtitle', 'order')
+    list_editable = ('order',)
+    ordering = ('order',)

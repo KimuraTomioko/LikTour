@@ -15,28 +15,23 @@ def index(request):
             }
         country_city_map[country_name]['cities'].extend(country_tour.cities.all())
 
-    news_list = News.objects.select_related('news').all()[:3]
+    news_list = News.objects.select_related('news')[:3]
+    banners = Banner.objects.all()  # Получаем все баннеры
 
+    question_form = QuestionForm(request.POST or None)
+    
     if request.method == 'POST':
-        question_form = QuestionForm(request.POST)
         if question_form.is_valid():
             question_form.save()
             return redirect('main_page')
-        else:
-            context = {
-                'country_city_map': country_city_map,
-                'form': question_form,
-                'news_list': news_list
-            }
-            return render(request, 'LikTour/index.html', context)
-    else:
-        question_form = QuestionForm()
-        context = {
-            'country_city_map': country_city_map,
-            'form': question_form,
-            'news_list': news_list
-        }
-        return render(request, 'LikTour/index.html', context)
+    
+    context = {
+        'country_city_map': country_city_map,
+        'form': question_form,
+        'news_list': news_list,
+        'banners': banners  # Добавляем баннеры в контекст
+    }
+    return render(request, 'LikTour/index.html', context)
 
 def city_detail(request, city_id):
     city = get_object_or_404(Cities, id=city_id)
