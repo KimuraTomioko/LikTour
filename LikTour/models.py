@@ -58,3 +58,35 @@ class SmallContactForm(models.Model):
         verbose_name = 'Заявка'
         verbose_name_plural = 'Заявки'
 
+
+class AboutNewsPage(models.Model):
+    title = models.CharField(max_length=45, verbose_name='Заголовок новости в отдельной странице')
+    first_info = models.TextField(max_length=1200, verbose_name='Первый блок с новостью')
+    first_info_phoro = models.ImageField(upload_to='image/%Y/%m/%d', null=True, blank=True, verbose_name='Фотография для 1 блока с новостью на странице')
+    second_info = models.TextField(max_length=1200, verbose_name='Второй блок с новостью')
+    second_info_photo = models.ImageField(upload_to='image/%Y/%m/%d', null=True, blank=True, verbose_name='Фотография для 2 блока с новостью на странице')
+    third_info = models.TextField(max_length=1200, verbose_name='Третий блок с новостью')
+    third_info_photo = models.ImageField(upload_to='image/%Y/%m/%d', null=True, blank=True, verbose_name='Фотография для 3 блока с новостью на странице')
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name = 'Новость отдельно'
+        verbose_name_plural = 'Новости отдельно'
+
+class News(models.Model):
+    title = models.CharField(max_length=45, verbose_name='Заголовок новости')
+    description = models.TextField(max_length=145, verbose_name='Описание новости')
+    news = models.ForeignKey(AboutNewsPage, on_delete=models.PROTECT, verbose_name='Новость')
+
+    def __str__(self):
+        return f"{self.title} - {self.description}"
+
+    class Meta:
+        verbose_name = 'Новость блоком'
+        verbose_name_plural = 'Новости блоком'
+
+
+
+

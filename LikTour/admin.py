@@ -30,5 +30,18 @@ class AdminSmallContactForm(admin.ModelAdmin):
     list_display_links = ('name',)
     list_filter = ('name',)
 
+@admin.register(AboutNewsPage)
+class AdminAboutNewsPage(admin.ModelAdmin):
+    list_display = ('title',)
+    list_display_links = ('title',)
+    list_filter = ('title',)
+
+@admin.register(News)
+class AdminNews(admin.ModelAdmin):
+    list_display = ('title', 'description')
+    list_display_links = ('title',)
+
+
+
 
     
