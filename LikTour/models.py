@@ -25,7 +25,7 @@ class Cities(models.Model):
 class CountryTour(models.Model):
     country = models.CharField(max_length=30, verbose_name='Название страны')
     country_photo = models.ImageField(upload_to='image/%Y/%m/%d', blank=True, null=True, verbose_name='Картинка страны')
-    cities = models.ManyToManyField(Cities, null=True, blank=True, verbose_name='Названия городов')
+    cities = models.ManyToManyField(Cities, blank=True, verbose_name='Названия городов')  # Убрано null=True
 
     def __str__(self):
         return f"{self.country} -- {', '.join(city.name for city in self.cities.all())}"
