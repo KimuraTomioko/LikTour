@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
 from .models import *
 from django.contrib import messages
 from .forms import *
@@ -21,9 +22,16 @@ def index(request):
     question_form = QuestionForm(request.POST or None)
     
     if request.method == 'POST':
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            if question_form.is_valid():
+                question_form.save()
+                return JsonResponse({'success': True})
+            else:
+                return JsonResponse({'success': False, 'errors': question_form.errors}, status=400)
+        
         if question_form.is_valid():
             question_form.save()
-            return redirect('main_page')
+            question_form = QuestionForm()
     
     context = {
         'country_city_map': country_city_map,
@@ -40,9 +48,38 @@ def city_detail(request, city_id):
     form = SmallContactForm(request.POST or None)
     
     if request.method == 'POST':
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            if form.is_valid():
+                contact = form.save(commit=False)
+                if country_tour:
+                    contact.country = country_tour
+                    contact.city = city
+                    contact.save()
+                    return JsonResponse({
+                        'success': True,
+                        'message': 'Ваша заявка успешно отправлена!'
+                    })
+                else:
+                    return JsonResponse({
+                        'success': False,
+                        'errors': {'country': 'Страна не найдена для этого города.'}
+                    }, status=400)
+            else:
+                return JsonResponse({
+                    'success': False,
+                    'errors': form.errors
+                }, status=400)
+    
         if form.is_valid():
-            form.save()
-            return redirect('main_page')
+            contact = form.save(commit=False)
+            if country_tour:
+                contact.country = country_tour
+                contact.city = city
+                contact.save()
+                messages.success(request, 'Ваша заявка успешно отправлена!')
+                return redirect('main_page')
+            else:
+                messages.error(request, 'Страна не найдена для этого города.')
     
     context = {
         'city': city,
@@ -71,9 +108,7 @@ def all_tours(request):
     return render(request, 'LikTour/properties.html', context)
 
 def all_news(request):
-    # Закреплённые новости (до 3)
     pinned_news = News.objects.select_related('news').filter(is_pinned=True)[:3]
-    # Обычные новости, отсортированные по дате (новые сверху)
     regular_news = News.objects.select_related('news').filter(is_pinned=False).order_by('-id')
 
     context = {
@@ -94,10 +129,18 @@ def about_us(request):
 
 def contact_with_us(request):
     form = QuestionForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('contact_with_us')
-    
+
+    if request.method == "POST":
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            if form.is_valid():
+                form.save()
+                return JsonResponse({'success': True})
+            else:
+                return JsonResponse({'success': False, 'errors': form.errors}, status=400)
+        if form.is_valid():
+            form.save()
+            form = QuestionForm()
+
     context = {
         'form': form
     }
