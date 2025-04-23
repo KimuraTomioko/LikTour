@@ -58,9 +58,9 @@ def index(request):
                     return redirect('index')
 
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-                return JsonResponse({'success': True, 'message': 'Ваша заявка успешно отправлена!'})
+                return JsonResponse({'success': True, 'message': 'Ваша заявка успешно отправлена! В течение 24 часов, мы ответим на ваше письмо, будьте на связи.'})
             else:
-                messages.success(request, 'Ваша заявка успешно отправлена!')
+                messages.success(request, 'Ваша заявка успешно отправлена! В течение 24 часов, мы ответим на ваше письмо, будьте на связи.')
                 return redirect('index')
         else:
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -119,7 +119,7 @@ def city_detail(request, city_id):
 
                     return JsonResponse({
                         'success': True,
-                        'message': 'Ваша заявка успешно отправлена!'
+                        'message': 'Ваша заявка успешно отправлена! В течение 24 часов, мы ответим на ваше письмо, будьте на связи.'
                     })
                 else:
                     return JsonResponse({
@@ -163,7 +163,7 @@ def city_detail(request, city_id):
                     messages.error(request, f'Ошибка отправки письма: {str(e)}')
                     return redirect('main_page')
 
-                messages.success(request, 'Ваша заявка успешно отправлена!')
+                messages.success(request, 'Ваша заявка успешно отправлена! В течениe 24 часов, мы ответим на ваше письмо, будьте на связи.')
                 return redirect('main_page')
             else:
                 messages.error(request, 'Страна не найдена для этого города.')
