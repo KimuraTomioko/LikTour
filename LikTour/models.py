@@ -50,12 +50,12 @@ class ContactForm(models.Model):
 
 class SmallContactForm(models.Model):
     name = models.CharField(max_length=20, blank=False, null=False, verbose_name='Имя')
-    telephone_number = PhoneNumberField(region='RU', verbose_name='Номер телефона')
+    email = models.EmailField(max_length=50, blank=False, null=False, verbose_name='Электронная почта')
     country = models.ForeignKey(CountryTour, on_delete=models.CASCADE, verbose_name='Страна')
     city = models.ForeignKey(Cities, on_delete=models.CASCADE, verbose_name='Город')
 
     def __str__(self):
-        return f"{self.name} -- {self.telephone_number}"
+        return f"{self.name} -- {self.email}"
     
     class Meta:
         verbose_name = 'Заявка'

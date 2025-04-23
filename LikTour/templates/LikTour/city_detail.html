@@ -126,8 +126,8 @@
               {{ form.name.errors }}
             </div>
             <div class="form-group">
-              {{ form.telephone_number }}
-              {{ form.telephone_number.errors }}
+              {{ form.email }}
+              {{ form.email.errors }}
             </div>
             <button type="submit" class="btn btn-primary">
               Оставить заявку
@@ -171,7 +171,7 @@
               if (response.success) {
                 // Показываем сообщение об успехе в модальном окне
                 modalTitle.textContent = response.message;
-                modalText.textContent = "Мы перезвоним вам, будете на связи.";
+                modalText.textContent = "Мы напишем вам, будете на связи.";
                 modal.classList.add("active");
                 form.reset(); // Очищаем форму
               } else {

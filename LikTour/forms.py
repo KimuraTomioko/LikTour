@@ -26,10 +26,10 @@ class SmallContactForm(forms.ModelForm):
         model = SmallContactForm
         fields = (
             'name', 
-            'telephone_number'
+            'email'
             )
         
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ваше имя'}),
-            'telephone_number': RegionalPhoneNumberWidget(attrs={'class':'form-control', 'placeholder':'Ваш телефон'})
+            'email': forms.EmailInput(attrs={'class':'form-control', 'placeholder':'Ваша электронная почта'})
         }

@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from .models import *
 from django.contrib import messages
 from .forms import *
+from django.core.mail import send_mail
 
 def index(request):
     countries = CountryTour.objects.prefetch_related('cities').all()
@@ -22,17 +23,51 @@ def index(request):
     question_form = QuestionForm(request.POST or None)
     
     if request.method == 'POST':
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-            if question_form.is_valid():
-                question_form.save()
-                return JsonResponse({'success': True})
-            else:
-                return JsonResponse({'success': False, 'errors': question_form.errors}, status=400)
-        
         if question_form.is_valid():
-            question_form.save()
-            question_form = QuestionForm()
-    
+            contact = question_form.save()
+            
+            # Формирование данных для письма
+            subject = f"Новая заявка от пользователя (с главной формы) {contact.name} с email: {contact.email}"
+            message = (
+                f"New message received:\n\n"
+                f"Name: {contact.name}\n"
+                f"Telephone: {contact.telephone_number}\n"
+                f"Email: {contact.email}\n"
+                f"Message subject: {contact.message_subject}\n"
+                f"Message: {contact.message}\n"
+            )
+            from_email = 'lik_tour_django@mail.ru'
+            recipient_list = ['zimarev.nazar13@gmail.com', 'lik-tour@yandex.ru'] 
+
+            try:
+                send_mail(
+                    subject,
+                    message,
+                    from_email,
+                    recipient_list,
+                    fail_silently=False,
+                )
+            except Exception as e:
+                if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                    return JsonResponse({
+                        'success': False,
+                        'errors': {'email': f'Ошибка отправки письма: {str(e)}'}
+                    }, status=500)
+                else:
+                    messages.error(request, f'Ошибка отправки письма: {str(e)}')
+                    return redirect('index')
+
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({'success': True, 'message': 'Ваша заявка успешно отправлена!'})
+            else:
+                messages.success(request, 'Ваша заявка успешно отправлена!')
+                return redirect('index')
+        else:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({'success': False, 'errors': question_form.errors}, status=400)
+            else:
+                messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
+
     context = {
         'country_city_map': country_city_map,
         'form': question_form,
@@ -55,6 +90,33 @@ def city_detail(request, city_id):
                     contact.country = country_tour
                     contact.city = city
                     contact.save()
+                    
+                    # Отправка письма
+                    subject = f"Новая заявка от пользователя(c контактной формы на странице города) {contact.name} с email: {contact.email}"
+                    message = (
+                        f"New message received:\n\n"
+                        f"Name: {contact.name}\n"
+                        f"Email: {contact.email}\n"
+                        f"Country: {contact.country}\n"
+                        f"City: {contact.city}\n"
+                    )
+                    from_email = 'lik_tour_django@mail.ru'
+                    recipient_list = ['zimarev.nazar13@gmail.com', 'lik-tour@yandex.ru']
+                    
+                    try:
+                        send_mail(
+                            subject,
+                            message,
+                            from_email,
+                            recipient_list,
+                            fail_silently=False,
+                        )
+                    except Exception as e:
+                        return JsonResponse({
+                            'success': False,
+                            'errors': {'email': f'Ошибка отправки письма: {str(e)}'}
+                        }, status=500)
+
                     return JsonResponse({
                         'success': True,
                         'message': 'Ваша заявка успешно отправлена!'
@@ -76,6 +138,31 @@ def city_detail(request, city_id):
                 contact.country = country_tour
                 contact.city = city
                 contact.save()
+                
+                # Отправка письма
+                subject = f"Новая заявка от пользователя {contact.name} с email: {contact.email}"
+                message = (
+                    f"New message received:\n\n"
+                    f"Name: {contact.name}\n"
+                    f"Email: {contact.email}\n"
+                    f"Country: {contact.country}\n"
+                    f"City: {contact.city}\n"
+                )
+                from_email = 'lik_tour_django@mail.ru'
+                recipient_list = ['zimarev.nazar13@gmail.com', 'lik-tour@yandex.ru']
+                
+                try:
+                    send_mail(
+                        subject,
+                        message,
+                        from_email,
+                        recipient_list,
+                        fail_silently=False,
+                    )
+                except Exception as e:
+                    messages.error(request, f'Ошибка отправки письма: {str(e)}')
+                    return redirect('main_page')
+
                 messages.success(request, 'Ваша заявка успешно отправлена!')
                 return redirect('main_page')
             else:

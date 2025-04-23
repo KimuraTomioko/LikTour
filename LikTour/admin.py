@@ -26,7 +26,7 @@ class AdminContactForm(admin.ModelAdmin):
 
 @admin.register(SmallContactForm)
 class AdminSmallContactForm(admin.ModelAdmin):
-    list_display = ('name', 'telephone_number', 'country', 'city')
+    list_display = ('name', 'email', 'country', 'city')
     list_display_links = ('name',)
     list_filter = ('name',)
 
