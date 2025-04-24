@@ -1,0 +1,96 @@
+{% load i18n static %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'en-us' }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %} - Кастомная админка</title>
+
+    <!-- Подключаем кастомные стили -->
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/custom_admin.css' %}">
+
+    <!-- Стандартные стили Django админки -->
+    {% block extrastyle %}
+        <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'admin/css/responsive.css' %}">
+    {% endblock %}
+
+    <!-- Дополнительные стили, если они есть -->
+    {% block extrahead %}{% endblock %}
+</head>
+<body class="{% if is_popup %}popup {% endif %}custom-admin-body">
+    <div class="admin-container">
+        <!-- Боковая панель -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Кастомная админка</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="{% url 'admin:index' %}">🏠 Главная</a></li>
+                    {% for app in app_list %}
+                        <li>
+                            <span class="app-label">{{ app.name }}</span>
+                            <ul class="model-list">
+                                {% for model in app.models %}
+                                    <li>
+                                        <a href="{{ model.admin_url }}">
+                                            {{ model.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                    <li><a href="{% url 'admin:logout' %}">🚪 Выход</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <!-- Хлебные крошки -->
+            {% block breadcrumbs %}
+                <div class="breadcrumbs">
+                    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+                    {% if title %} &rsaquo; {{ title }}{% endif %}
+                </div>
+            {% endblock %}
+
+            <!-- Сообщения -->
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <!-- Контент -->
+            <div class="content">
+                {% block content %}
+                    {{ content }}
+                {% endblock %}
+            </div>
+        </main>
+    </div>
+
+    <!-- Футер -->
+    <footer class="custom-footer">
+        <p>Кастомная админка &copy; 2025</p>
+    </footer>
+
+    <!-- Стандартные скрипты Django админки -->
+    {% block extrajs %}
+        <script src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+        <script src="{% static 'admin/js/jquery.init.js' %}"></script>
+        <script src="{% static 'admin/js/core.js' %}"></script>
+        <script src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script>
+        <script src="{% static 'admin/js/actions.js' %}"></script>
+        <script src="{% static 'admin/js/urlify.js' %}"></script>
+        <script src="{% static 'admin/js/prepopulate.js' %}"></script>
+        <script src="{% static 'admin/js/vendor/xregexp/xregexp.js' %}"></script>
+    {% endblock %}
+</body>
+</html>

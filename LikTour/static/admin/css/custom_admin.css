@@ -1,0 +1,183 @@
+/* Основной контейнер */
+.custom-admin-body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: #f5f7fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Контейнер для боковой панели и контента */
+.admin-container {
+    display: flex;
+    flex: 1;
+}
+
+/* Боковая панель */
+.sidebar {
+    width: 250px;
+    background: #2c3e50;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок боковой панели */
+.sidebar-header {
+    padding: 20px;
+    background: #34495e;
+    text-align: center;
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #ffd700;
+}
+
+/* Навигация в боковой панели */
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    padding: 10px 20px;
+}
+
+.sidebar-nav li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar-nav li a:hover {
+    background: #1abc9c;
+    border-radius: 5px;
+}
+
+.sidebar-nav .app-label {
+    font-weight: bold;
+    color: #ffd700;
+    display: block;
+    padding: 5px 0;
+}
+
+.sidebar-nav .model-list {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.sidebar-nav .model-list li a {
+    color: #bdc3c7;
+}
+
+.sidebar-nav .model-list li a:hover {
+    background: #16a085;
+}
+
+/* Основной контент */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    flex: 1;
+}
+
+.breadcrumbs {
+    background: #e0e0e0;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.breadcrumbs a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Сообщения */
+.messages {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.messages li {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.messages .success {
+    background: #c8e6c9;
+    color: #2e7d32;
+}
+
+.messages .error {
+    background: #ffcdd2;
+    color: #c62828;
+}
+
+/* Кнопки */
+.submit-row input[type="submit"] {
+    background: #1abc9c;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.submit-row input[type="submit"]:hover {
+    background: #16a085;
+}
+
+/* Таблицы */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+    background: #34495e;
+    color: white;
+}
+
+/* Футер */
+.custom-footer {
+    text-align: center;
+    padding: 10px;
+    background: #2c3e50;
+    color: #ecf0f1;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
